@@ -1,12 +1,74 @@
-# React + Vite
+# Project: react-basic
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern web application built with React, Vite, and styled with Tailwind CSS. This project integrates with Appwrite for backend services.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React 19:** Leverages the latest features of React for a fast and interactive user interface.
+- **Vite:** Next-generation frontend tooling for a significantly faster development experience.
+- **Tailwind CSS:** A utility-first CSS framework for rapid UI development.
+- **Appwrite:** Utilizes Appwrite for backend services, such as authentication, databases, and storage.
+- **ESLint:** Integrated for code quality and consistency.
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+- Node.js (v18 or newer)
+- npm, yarn, or pnpm
+
+### Installation
+
+1.  Clone the repository:
+    ```bash
+    git clone <your-repository-url>
+    cd react-basic
+    ```
+
+2.  Install the dependencies:
+    ```bash
+    npm install
+    ```
+
+### Appwrite Configuration
+
+To connect to your Appwrite backend, you will need to create a configuration file or set environment variables with your Appwrite project ID and endpoint. 
+
+*Hint: Create a `config.js` or `.env` file in the `src` directory to store these values.*
+
+## Available Scripts
+
+In the project directory, you can run:
+
+- `npm run dev`: Runs the app in development mode. Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
+
+- `npm run build`: Builds the app for production to the `dist` folder.
+
+- `npm run lint`: Lints the source code using ESLint.
+
+- `npm run preview`: Serves the production build locally to preview it.
+
+## Project Structure
+
+```
+react-basic/
+├── dist/                   # Production build output
+├── node_modules/           # Project dependencies
+├── public/                 # Static assets (e.g., images, fonts)
+├── src/                    # Application source code
+│   ├── components/         # Reusable React components
+│   ├── App.jsx             # Main application component
+│   └── main.jsx            # Entry point of the application
+├── .eslintrc.cjs           # ESLint configuration
+├── index.html              # Main HTML file
+├── package.json            # Project metadata and dependencies
+├── README.md               # This file
+└── vite.config.js          # Vite configuration
+```
+
+## Learn More
+
+- [React Documentation](https://react.dev/)
+- [Vite Documentation](https://vitejs.dev/guide/)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Appwrite Documentation](https://appwrite.io/docs)
