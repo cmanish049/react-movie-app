@@ -21,7 +21,7 @@ A modern web application built with React, Vite, and styled with Tailwind CSS. T
 
 1.  Clone the repository:
     ```bash
-    git clone <your-repository-url>
+    git clone git@github.com:cmanish049/react-movie-app.git
     cd react-basic
     ```
 
