@@ -1,9 +1,25 @@
-import { use, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import Search from './components/Search';
 import Spinner from './components/Spinner';
 import MovieCard from './components/MovieCard';
 import { useDebounce } from 'react-use';
-import { updateSearchCount, getTrendingMovies } from './appwrite.js';
+import { updateSearchCount, getTrendingMovies, TrendingMovieDocument } from './appwrite';
+
+// Interfaces
+interface Movie {
+  id: number;
+  title: string;
+  vote_average: number;
+  poster_path: string | null;
+  release_date: string;
+  original_language: string;
+}
+
+interface TmdbResponse {
+  results: Movie[];
+  Response?: string;
+  Error?: string;
+}
 
 const API_BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -16,21 +32,21 @@ const API_OPTIONS = {
   },
 };
 
-const App = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [movieList, setMovieList] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
-  const [trendingMovies, setTrendingMovies] = useState([]);
-  const [trendingMoviesLoading, setTrendingMoviesLoading] = useState(false);
-  const [trendingMoviesError, setTrendingMoviesError] = useState('');
+const App: React.FC = () => {
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [movieList, setMovieList] = useState<Movie[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState<string>('');
+  const [trendingMovies, setTrendingMovies] = useState<TrendingMovieDocument[]>([]);
+  const [trendingMoviesLoading, setTrendingMoviesLoading] = useState<boolean>(false);
+  const [trendingMoviesError, setTrendingMoviesError] = useState<string>('');
 
   useDebounce(() => {
     setDebouncedSearchTerm(searchTerm);
   }, 500, [searchTerm]);
 
-  const fetchMovies = async (query = '') => {
+  const fetchMovies = async (query: string = '') => {
     setIsLoading(true);
     setErrorMessage('');
     try {
@@ -41,14 +57,14 @@ const App = () => {
       if (!response.ok) {
         throw new Error('Failed to fetch movies');
       }
-      const data = await response.json();
+      const data: TmdbResponse = await response.json();
       if (data.Response === 'False') {
         setErrorMessage(data.Error || 'Failed to fetch movies');
         setMovieList([]);
         return;
       }
       setMovieList(data.results);
-      if( query && data.results.length > 0) {
+      if (query && data.results.length > 0) {
         updateSearchCount(query, data.results[0]); // Update search count in Appwrite
       }
     } catch (error) {
@@ -57,7 +73,7 @@ const App = () => {
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   const loadTrendingMovies = async () => {
     setTrendingMoviesLoading(true);
@@ -71,15 +87,13 @@ const App = () => {
     } finally {
       setTrendingMoviesLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
-    // fetch movies or perform any side effects here
-    fetchMovies(debouncedSearchTerm)
+    fetchMovies(debouncedSearchTerm);
   }, [debouncedSearchTerm]);
 
   useEffect(() => {
-    // Load trending movies on initial render
     loadTrendingMovies();
   }, []);
 
@@ -95,20 +109,19 @@ const App = () => {
         {trendingMovies.length > 0 && (
           <section className="trending">
             <h2>Trending Movies</h2>
-
             {trendingMoviesLoading ? (
               <Spinner />
             ) : trendingMoviesError ? (
               <p className='text-red-500'>{trendingMoviesError}</p>
             ) : (
               <ul>
-              {trendingMovies.map((movie, index) => (
-                <li key={movie.$id}>
-                  <p>{index + 1}</p>
-                  <img src={movie.poster_url} alt={movie.title} />
-                </li>
-              ))}
-            </ul>
+                {trendingMovies.map((movie, index) => (
+                  <li key={movie.$id}>
+                    <p>{index + 1}</p>
+                    <img src={movie.poster_url} alt={movie.searchTerm} />
+                  </li>
+                ))}
+              </ul>
             )}
           </section>
         )}
@@ -129,6 +142,6 @@ const App = () => {
       </div>
     </main>
   );
-}
+};
 
-export default App
+export default App;

@@ -4,7 +4,7 @@ A modern web application built with React, Vite, and styled with Tailwind CSS. T
 
 ## Features
 
-- **React 19:** Leverages the latest features of React for a fast and interactive user interface.
+- **React 19 & TypeScript:** A modern, type-safe web application built with React and TypeScript.
 - **Vite:** Next-generation frontend tooling for a significantly faster development experience.
 - **Tailwind CSS:** A utility-first CSS framework for rapid UI development.
 - **Appwrite:** Utilizes Appwrite for backend services, such as authentication, databases, and storage.
@@ -62,13 +62,15 @@ react-basic/
 ├── public/                 # Static assets (e.g., images, fonts)
 ├── src/                    # Application source code
 │   ├── components/         # Reusable React components
-│   ├── App.jsx             # Main application component
-│   └── main.jsx            # Entry point of the application
+│   ├── App.tsx             # Main application component
+│   └── main.tsx            # Entry point of the application
 ├── .env.example            # Example environment variables
 ├── .eslintrc.cjs           # ESLint configuration
 ├── index.html              # Main HTML file
 ├── package.json            # Project metadata and dependencies
 ├── README.md               # This file
+├── tsconfig.json           # TypeScript configuration
+├── tsconfig.node.json    # TypeScript node configuration
 └── vite.config.js          # Vite configuration
 ```
 

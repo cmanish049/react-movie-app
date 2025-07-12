@@ -1,6 +1,18 @@
 import React from 'react'
 
-const MovieCard = ({ movie: {title, vote_average, poster_path, release_date, original_language} }) => {
+interface Movie {
+  title: string;
+  vote_average: number;
+  poster_path: string | null;
+  release_date: string;
+  original_language: string;
+}
+
+interface MovieCardProps {
+  movie: Movie;
+}
+
+const MovieCard: React.FC<MovieCardProps> = ({ movie: {title, vote_average, poster_path, release_date, original_language} }) => {
 return (
     <div className='movie-card'>
         <img src={poster_path ? `https://image.tmdb.org/t/p/w500${poster_path}` : '/no-movie.png'} alt={title} />
