@@ -37,7 +37,13 @@ The application uses Appwrite to track the popularity of search terms. The relev
 
 ### Environment Variables
 
-The following environment variables are required in a `.env` file at the project root:
+To get started, copy the `.env.example` file to a new file named `.env` in the project root:
+
+```bash
+cp .env.example .env
+```
+
+Then, fill in the following environment variables in your `.env` file:
 
 - `VITE_APPWRITE_PROJECT_ID`: Your Appwrite project ID.
 - `VITE_APPWRITE_DATABASE_ID`: The ID of the Appwrite database.

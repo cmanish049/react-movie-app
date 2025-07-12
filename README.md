@@ -30,11 +30,16 @@ A modern web application built with React, Vite, and styled with Tailwind CSS. T
     npm install
     ```
 
-### Appwrite Configuration
+### Environment Setup
 
-To connect to your Appwrite backend, you will need to create a configuration file or set environment variables with your Appwrite project ID and endpoint. 
+This project uses environment variables to handle sensitive keys and configuration.
 
-*Hint: Create a `config.js` or `.env` file in the `src` directory to store these values.*
+1.  Create a `.env` file in the root of the project by copying the example file:
+    ```bash
+    cp .env.example .env
+    ```
+
+2.  Open the `.env` file and add your credentials for the TMDb API and Appwrite.
 
 ## Available Scripts
 
@@ -59,6 +64,7 @@ react-basic/
 │   ├── components/         # Reusable React components
 │   ├── App.jsx             # Main application component
 │   └── main.jsx            # Entry point of the application
+├── .env.example            # Example environment variables
 ├── .eslintrc.cjs           # ESLint configuration
 ├── index.html              # Main HTML file
 ├── package.json            # Project metadata and dependencies
